@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png"> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&family=Fraunces:wght@700&family=Inter:wght@400;700;800&family=Montserrat:wght@500;700&family=Overpass:wght@400;700&family=Plus+Jakarta+Sans:wght@500;800&family=Poppins:ital,wght@0,700;1,400;1,800&family=Roboto:wght@400;700&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <title>Frontend Mentor | Time tracking dashboard</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }   
+    
+/* - Blue: hsl(246, 80%, 60%)
+
+- Light red (work): hsl(15, 100%, 70%)
+- Soft blue (play): hsl(195, 74%, 62%)
+- Light red (study): hsl(348, 100%, 68%)
+- Lime green (exercise): hsl(145, 58%, 55%)
+- Violet (social): hsl(264, 64%, 52%)
+- Soft orange (self care): hsl(43, 84%, 65%)
+
+### Neutral
+
+- Very dark blue: hsl(226, 43%, 10%)
+- Dark blue: hsl(235, 46%, 20%)
+- Desaturated blue: hsl(235, 45%, 61%)
+- Pale Blue: hsl(236, 100%, 87%) */
+    body{ 
+      display:flex; 
+      justify-content:center; 
+      align-items: center; 
+      height:100vh; 
+      background-color: hsl(226, 43%, 10%) ; 
+      font-family:Rubik;
+    }  
+    .profile{ 
+      display: grid; 
+      grid-template-rows:300px 1fr; 
+      background-color: hsl(235, 46%, 20%) ; 
+      border-radius: 15px; 
+      color:white;
+    }
+    .profile_photo img{ 
+      height:60px;   
+      border:2px solid white; 
+      border-radius:50%;
+    }
+    .profile_photo{ 
+      background-color:hsl(235, 52%, 49%); 
+      padding:25px; 
+      border-radius: 15px; 
+    } 
+    
+    .main{ 
+      display:grid; 
+     grid-template-columns:200px 1fr;
+     column-gap: 25px;
+    }  
+    
+    .info{ 
+      display: grid; 
+      grid-template-columns:220px 220px 220px; 
+      column-gap:25px ; 
+      row-gap: 25px; 
+     
+    }
+    a{ 
+      text-decoration: none;  
+     
+      color:lightslategray;  
+       cursor: pointer;
+    }  
+   
+    .grid{ 
+      display:flex; 
+      flex-direction: row;  
+      justify-content: space-between; 
+      align-items: center;
+    } 
+    .grid img{ 
+      height:5px; 
+
+    }  
+    .Work ,.play,.study,.exercise,.social,.self_care{  
+      display:grid; 
+      grid-template-rows:40px 1fr;
+      background-color:hsl(15, 100%, 70%) ; 
+      border-radius: 15px; 
+      cursor: pointer;
+      /* height:185px; */
+    }
+    .hrs{  
+    
+      padding:25px; 
+      border-style: solid; 
+      background-color:  hsl(235, 46%, 20%);
+      border-radius:15px; 
+      height:120px; 
+      border-style:none 
+
+    } 
+    .hrs p{ 
+      margin: 0px; 
+      color:white;
+    } 
+    .play{ 
+      background-color:hsl(195, 74%, 62%) ;
+    } 
+    .study{ 
+      background-color:hsl(348, 100%, 68%) ;
+    } 
+    .exercise{ 
+      background-color:hsl(145, 58%, 55%) ;
+    } 
+    .social{ 
+      background-color: hsl(264, 64%, 52%);
+    }
+    .self_care{ 
+      background-color: hsl(43, 84%, 65%);
+    } 
+    a:hover{ 
+      color: white;
+    } 
+ 
+   
+  </style> 
+</head>
+<body>
+    <div class="main"> 
+      <div class="profile">
+        <div class="profile_photo"> 
+             <img src="image-jeremy.png"> 
+             <p style="margin:0px;margin-top:25px;font-size:12px;font-weight: 300;">Report for</p>
+             <p style="font-size: 36px;margin:0px;font-weight: 300;">Jeremy Robson</p>
+        </div>  
+        
+        <div class="day"> 
+          <a href="#"  style="display: block;margin:15px">Daily</a>
+          <a href="#" style="display: block;margin:15px;color:white">Weekly</a>
+          <a href="#" style="display: block;margin:15px">Monthly</a>
+        </div> 
+     </div>  
+
+
+
+      <div class="info"> 
+          <div class="Work">  
+              <div class="image">
+                <img style="height:45px;margin-left:155px;"src="icon-work.svg">  
+              </div>
+              
+              <div class="hrs" id="hours" onmouseenter="changeColor(0)"onmouseleave="getBack(0)">
+                <div class="grid"> 
+                  <p>Work</p>  
+                  <div id="ellipsis" onmouseenter="hover(0)" onmouseleave="hover2(0)"> 
+                    <img src="icon-ellipsis.svg">
+                  </div>
+                
+                </div>
+                <p style="font-size:36px;margin:15px 10px 10px 0px;">32hrs</p>
+                <p style="font-size:14px;color:white;">Last Week-36hrs</p>
+              </div>
+             
+             </div> 
+
+             <div class="play">  
+              <div class="image">
+                <img style="height:45px;margin-left:155px;"src="icon-play.svg">  
+              </div>
+              
+              <div class="hrs"  id="hours" onmouseenter="changeColor(1)"onmouseleave="getBack(1)">
+                <div class="grid"> 
+                  <p>Play</p>  
+                  <div class="ellipsis" onmouseenter="hover(1)" onmouseleave="hover2(1)">
+                    <img src="icon-ellipsis.svg">
+                  </div>
+                  
+                </div>
+                <p style="font-size:36px;margin:15px 10px 10px 0px;">10hrs</p>
+                <p style="font-size:14px;color:white;">Last Week-8hrs</p>
+              </div>
+             
+             </div>  
+
+
+    <div class="study">  
+              <div class="image">
+                <img style="height:45px;margin-left:155px;"src="icon-study.svg">  
+              </div>
+              
+              <div class="hrs" id="hours" onmouseenter="changeColor(2)" onmouseleave="getBack(2)">
+                <div class="grid"> 
+                  <p>Study</p> 
+                 <div class="ellipsis" onmouseenter="hover(2)" onmouseleave="hover2(2)">
+                  <img src="icon-ellipsis.svg">
+                 </div> 
+                </div>
+                <p style="font-size:36px;margin:15px 10px 10px 0px;">4hrs</p>
+                <p style="font-size:14px;color:white;">Last Week-7hrs</p>
+              </div>
+             
+             </div> 
+
+    <div class="exercise">  
+              <div class="image">
+                <img style="height:45px;margin-left:155px;"src="icon-exercise.svg">  
+              </div>
+              
+              <div class="hrs" id="hours" onmouseenter="changeColor(3)"onmouseleave="getBack(3)">
+                <div class="grid"> 
+                  <p>Exercise</p> 
+                 <div class="ellipsis" onmouseenter="hover(3)" onmouseleave="hover2(3)">
+                  <img src="icon-ellipsis.svg">
+                 </div>
+                </div>
+                <p style="font-size:36px;margin:15px 10px 10px 0px;">4hrs</p>
+                <p style="font-size:14px;color:white;">Last Week-5hrs</p>
+              </div>
+             
+    </div>  
+             
+             
+             <div class="social">  
+              <div class="image">
+                <img style="height:45px;margin-left:155px;"src="icon-social.svg">  
+              </div>
+              
+              <div class="hrs" id="hours" onmouseenter="changeColor(4)"onmouseleave="getBack(4)">
+                <div class="grid"> 
+                  <p>Social</p> 
+                 <div class="ellipsis" onmouseenter="hover(4)" onmouseleave="hover2(4)">
+                  <img src="icon-ellipsis.svg">
+                 </div>
+                </div>
+                <p style="font-size:36px;margin:15px 10px 10px 0px;">5hrs</p>
+                <p style="font-size:14px;color:white;">Last Week-10hrs</p>
+              </div>
+             
+             </div>  
+
+
+ <div class="self_care">  
+              <div class="image">
+                <img style="height:45px;margin-left:155px;"src="icon-self-care.svg">  
+              </div>
+              
+              <div class="hrs" id="hours" onmouseenter="changeColor(5)"onmouseleave="getBack(5)">
+                <div class="grid"> 
+                  <p>Self Care</p> 
+                 <div class="ellipsis" onmouseenter="hover(5)" onmouseleave="hover2(5)">
+                  <img src="icon-ellipsis.svg">
+                 </div> 
+                </div>
+                <p style="font-size:36px;margin:15px 10px 10px 0px;">2hrs</p>
+                <p style="font-size:14px;color:white;">Last Week-2hrs</p>
+              </div>
+             
+             </div> 
+
+    
+      </div>
+    </div>  
+    <script>  
+
+        
+        function hover(num){ 
+          let ell=document.getElementsByClassName("hrs");  
+          ell[num].style.backgroundColor="hsl(235, 46%, 20%)";
+          return;
+        } 
+        function hover2(num){ 
+          let ell=document.getElementsByClassName("hrs");  
+          ell[num].style.backgroundColor="hsl(236, 31%, 42%) "; 
+          return;
+
+        }   
+        function changeColor(num){ 
+          let ell=document.getElementsByClassName("hrs");  
+          ell[num].style.backgroundColor="hsl(236, 31%, 42%) "; 
+          return;
+        }
+        function getBack(num){ 
+          let ell=document.getElementsByClassName("hrs");  
+          ell[num].style.backgroundColor="hsl(235, 46%, 20%)"; 
+          return;
+        }
+    </script>
+</body>
+</html>
